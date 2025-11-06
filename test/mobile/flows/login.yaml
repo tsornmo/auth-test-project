@@ -1,0 +1,11 @@
+appId: com.yourcompany.authapp
+---
+# Login Flow Test
+- launchApp
+- assertVisible: "Login"
+- tapOn: "Email"
+- inputText: "test@example.com"
+- tapOn: "Password"
+- inputText: "password123"
+- tapOn: "Login"
+- assertVisible: "Dashboard"

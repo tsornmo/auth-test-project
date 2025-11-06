@@ -1,0 +1,29 @@
+appId: com.yourcompany.authapp
+---
+# Complete User Journey Test
+- launchApp
+- assertVisible: "Login"
+
+# Valid login
+- tapOn: "Email"
+- inputText: "test@example.com"
+- tapOn: "Password"
+- inputText: "password123"
+- tapOn: "Login"
+- assertVisible: "Dashboard"
+
+# Navigate through app
+- tapOn: "Profile"
+- assertVisible: "User Profile"
+- pressKey: "Back"
+
+- tapOn: "Settings"
+- assertVisible: "App Settings"
+- pressKey: "Back"
+
+# Logout
+- tapOn: "Logout"
+- assertVisible: "Login"
+
+# Test app state reset
+- assertNotVisible: "Dashboard"

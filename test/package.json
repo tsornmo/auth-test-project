@@ -1,0 +1,28 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:web && npm run test:mobile",
+    "test:web": "cd web && playwright test",
+    "test:web:headed": "cd web && playwright test --headed",
+    "test:web:ui": "cd web && playwright test --ui",
+    "test:web:debug": "cd web && playwright test --debug",
+    "test:web:report": "cd web && playwright show-report",
+    "test:mobile": "npm run maestro:all",
+    "maestro:login": "export PATH=\"$PATH\":\"$HOME/.maestro/bin\" && export JAVA_HOME=$(/opt/homebrew/bin/brew --prefix openjdk@17) && maestro test mobile/flows/login.yaml",
+    "maestro:validation": "export PATH=\"$PATH\":\"$HOME/.maestro/bin\" && export JAVA_HOME=$(/opt/homebrew/bin/brew --prefix openjdk@17) && maestro test mobile/flows/login-validation.yaml",
+    "maestro:dashboard": "export PATH=\"$PATH\":\"$HOME/.maestro/bin\" && export JAVA_HOME=$(/opt/homebrew/bin/brew --prefix openjdk@17) && maestro test mobile/flows/dashboard-navigation.yaml",
+    "maestro:journey": "export PATH=\"$PATH\":\"$HOME/.maestro/bin\" && export JAVA_HOME=$(/opt/homebrew/bin/brew --prefix openjdk@17) && maestro test mobile/flows/user-journey.yaml",
+    "maestro:all": "export PATH=\"$PATH\":\"$HOME/.maestro/bin\" && export JAVA_HOME=$(/opt/homebrew/bin/brew --prefix openjdk@17) && maestro test mobile/flows/",
+    "maestro:studio": "export PATH=\"$PATH\":\"$HOME/.maestro/bin\" && export JAVA_HOME=$(/opt/homebrew/bin/brew --prefix openjdk@17) && maestro studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

@@ -1,0 +1,35 @@
+# Configuration file for Maestro mobile testing
+
+# Global settings
+env:
+  APP_ID: "com.yourcompany.authapp"
+  BASE_URL: "http://localhost:5173"
+  
+# Default timeouts (in milliseconds)
+timeouts:
+  default: 10000
+  assertion: 5000
+  input: 3000
+
+# Device configurations
+devices:
+  ios:
+    simulator: "iPhone 15 Pro"
+    os_version: "17.0"
+  android:
+    emulator: "Pixel_7_API_34"
+    api_level: 34
+
+# Test settings
+test:
+  # Take screenshots on failure
+  screenshot_on_failure: true
+  
+  # Record video during test execution
+  record_video: false
+  
+  # Retry failed tests
+  retry_count: 2
+  
+  # Test execution speed (slow, normal, fast)
+  execution_speed: "normal"

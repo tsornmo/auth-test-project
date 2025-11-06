@@ -1,0 +1,21 @@
+appId: com.yourcompany.authapp
+---
+# Dashboard Navigation Test
+- launchApp
+- assertVisible: "Login"
+- tapOn: "Email"
+- inputText: "test@example.com"
+- tapOn: "Password"
+- inputText: "password123"
+- tapOn: "Login"
+- assertVisible: "Dashboard"
+
+# Test dashboard elements
+- assertVisible: "Welcome"
+- assertVisible: "Profile"
+- assertVisible: "Settings"
+- assertVisible: "Logout"
+
+# Test logout
+- tapOn: "Logout"
+- assertVisible: "Login"

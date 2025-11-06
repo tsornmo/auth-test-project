@@ -1,0 +1,16 @@
+# Playwright Test Results
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Maestro Test Results
+maestro-reports/
+*.mp4
+*.png
+
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+.env.local

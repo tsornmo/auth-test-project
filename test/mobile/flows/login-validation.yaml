@@ -1,0 +1,25 @@
+appId: com.yourcompany.authapp
+---
+# Login Validation Test - Empty Form
+- launchApp
+- assertVisible: "Login"
+- tapOn: "Login"
+- assertVisible: 
+    text: "Email is required"
+    optional: true
+- assertVisible:
+    text: "Please enter a valid email"
+    optional: true
+
+---
+# Login Validation Test - Invalid Email
+- launchApp
+- assertVisible: "Login"
+- tapOn: "Email"
+- inputText: "invalid-email"
+- tapOn: "Password"
+- inputText: "password123"
+- tapOn: "Login"
+- assertVisible:
+    text: "Please enter a valid email"
+    optional: true
