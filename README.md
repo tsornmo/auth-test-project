@@ -55,8 +55,74 @@ auth-test-project/
 
 3. **Start development environment**
    ```bash
-   ./start-dev.sh
+   ./manage.sh start
    ```
+
+## 🛠️ Management Commands
+
+The project uses a single unified management script for all operations:
+
+### Core Operations
+```bash
+./manage.sh start                  # Start development environment (default)
+./manage.sh start-prod             # Start production environment  
+./manage.sh stop                   # Stop all services
+./manage.sh restart [dev|prod]     # Restart services (default: dev)
+./manage.sh status                 # Check service status
+```
+
+### Log Management
+```bash
+./manage.sh logs view [server|client|all]    # View logs
+./manage.sh logs tail [server|client|all]    # Follow logs in real-time
+./manage.sh logs clear [server|client|all]   # Clear logs
+./manage.sh logs-list                        # List log files
+```
+
+### Maintenance
+```bash
+./manage.sh cleanup [--all|--logs|--builds|--deps|--temp]
+./manage.sh install                          # Install all dependencies
+./manage.sh build                           # Build client for production
+```
+
+### Testing
+```bash
+./manage.sh test-web                        # Run web tests (Playwright)
+./manage.sh test-mobile                     # Run mobile tests (Maestro)
+./manage.sh test-all                        # Run all tests
+```
+
+### Quick Examples
+```bash
+# Start development (shows real-time startup progress)
+./manage.sh start
+
+# Check what's running (with recent log activity)
+./manage.sh status
+
+# View server logs in real-time
+./manage.sh logs tail server
+
+# Restart in production mode
+./manage.sh restart prod
+
+# Clean up everything
+./manage.sh cleanup --all
+
+# Stop everything
+./manage.sh stop
+```
+
+### Command Aliases
+For convenience, several commands have short aliases:
+- `start` = `start-dev` = `dev` (development is default)
+- `start-prod` = `prod` = `production`
+- `status` = `st` = `ps`
+- `stop` = `shutdown` = `down`
+- `test` = `test-all`
+
+Plus a shorter script: `./app <command>` = `./manage.sh <command>`
 
 ## 🧪 Testing
 
@@ -85,10 +151,48 @@ npm test                     # Run both web and mobile tests
 
 ## 🛠️ Development
 
-### Starting the Development Environment
-```bash
-./start-dev.sh               # Starts both client and server in development mode
-```
+### Unified Management Script
+
+The project uses a single `manage.sh` script for all operations:
+
+| Command | Purpose | Usage |
+|---------|---------|--------|
+| `start-dev` | Start development environment | `./manage.sh start-dev` |
+| `start-prod` | Start production environment | `./manage.sh start-prod` |
+| `stop` | Stop all services | `./manage.sh stop` |
+| `status` | Check service status | `./manage.sh status` |
+| `restart` | Restart services | `./manage.sh restart [dev\|prod]` |
+| `logs` | Manage logs | `./manage.sh logs [view\|tail\|clear] [service]` |
+| `cleanup` | Clean artifacts | `./manage.sh cleanup [options]` |
+| `test-*` | Run tests | `./manage.sh test-web\|test-mobile\|test-all` |
+
+### Development Workflow
+
+1. **Start Development**
+   ```bash
+   ./manage.sh start-dev    # Starts both client and server, exits
+   ./manage.sh status       # Check if services are running
+   ```
+
+2. **Monitor Services**
+   ```bash
+   ./manage.sh logs tail    # Follow all logs
+   ./manage.sh status       # Check service health
+   ```
+
+3. **Make Changes**
+   - Edit code (hot reload is enabled)
+   - Services automatically restart on changes
+
+4. **Restart if Needed**
+   ```bash
+   ./manage.sh restart      # Restart development environment
+   ```
+
+5. **Stop Services**
+   ```bash
+   ./manage.sh stop         # Stop all services cleanly
+   ```
 
 ### Available Scripts
 

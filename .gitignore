@@ -23,6 +23,13 @@ pids
 *.seed
 *.pid.lock
 
+# Process management
+.pids/
+
+# Logs
+logs/
+*.log
+
 # Coverage directory used by tools like istanbul
 coverage/
 
@@ -68,10 +75,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
-
-# Logs
-logs
-*.log
 
 # Test results
 test-results/
