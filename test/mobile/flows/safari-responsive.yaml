@@ -1,0 +1,110 @@
+appId: com.apple.mobilesafari
+---
+# 📱 Mobile Safari Responsive Design Test
+# Tests UI adaptation and usability on mobile devices
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to the app
+- tapOn: 
+    id: "URL"
+- inputText: "localhost:5173"
+- pressKey: Enter
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# Take screenshot of mobile login layout
+- takeScreenshot: "01-mobile-login-layout"
+
+# Verify mobile layout elements are accessible
+- assertVisible:
+    text: "🔐 Secure Login"
+
+# Check that form elements are properly sized for mobile
+- assertVisible:
+    id: "username"
+
+- assertVisible:
+    id: "password"
+
+# Test form interaction on mobile
+- tapOn:
+    id: "username"
+- inputText: "admin"
+
+# Verify mobile keyboard doesn't break layout
+- takeScreenshot: "02-mobile-with-keyboard"
+
+# Continue with password
+- tapOn:
+    id: "password"
+- inputText: "SecurePass123!"
+
+# Hide keyboard by tapping login
+- tapOn:
+    text: "Login"
+
+# Wait for dashboard mobile layout
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# Take screenshot of mobile dashboard
+- takeScreenshot: "03-mobile-dashboard-layout"
+
+# Verify dashboard elements are mobile-friendly
+- assertVisible:
+    text: "✅ Authentication Successful!"
+
+# Test scrolling to see all cards on mobile
+- scroll
+
+# Verify all three cards are accessible via scrolling
+- assertVisible:
+    text: "🔒 Secure"
+
+- scroll
+
+- assertVisible:
+    text: "Stateless"
+
+- scroll
+
+- assertVisible:
+    text: "⚡ Fast"
+
+# Take screenshot after scrolling
+- takeScreenshot: "04-mobile-cards-scrolled"
+
+# Test that logout button is accessible
+- scroll
+
+- assertVisible:
+    text: "Logout"
+
+# Take screenshot showing logout button visibility
+- takeScreenshot: "05-mobile-logout-visible"
+
+# Test logout functionality on mobile
+- tapOn:
+    text: "Logout"
+
+# Wait for navigation
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# Verify mobile login page layout after logout
+- takeScreenshot: "06-mobile-after-logout"
+
+- assertVisible:
+    text: "🔐 Secure Login"
+
+# Test orientation/zoom resilience (if applicable)
+- assertVisible:
+    id: "username"
+
+- assertVisible:
+    id: "password"
+
+# Final mobile layout verification
+- takeScreenshot: "07-mobile-final-state"

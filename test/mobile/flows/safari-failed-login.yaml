@@ -1,0 +1,93 @@
+appId: com.apple.mobilesafari
+---
+# ❌ Mobile Safari Failed Login Test
+# Tests error handling for invalid credentials
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to the app
+- tapOn: 
+    id: "URL"
+- inputText: "localhost:5173"
+- pressKey: Enter
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# Take initial screenshot
+- takeScreenshot: "01-failed-login-start"
+
+# Enter wrong credentials
+- tapOn:
+    id: "username"
+- inputText: "wronguser"
+
+- tapOn:
+    id: "password"
+- inputText: "wrongpassword"
+
+# Take screenshot with wrong credentials
+- takeScreenshot: "02-wrong-credentials"
+
+# Attempt login
+- tapOn:
+    text: "Login"
+
+# Wait for error to appear
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# Take screenshot showing error state
+- takeScreenshot: "03-error-displayed"
+
+# Verify error message appears
+- assertVisible:
+    text: "⚠️"
+    timeout: 5000
+
+- assertVisible:
+    text: "Invalid username or password"
+
+# Verify we're still on login page (authentication failed)
+- assertVisible:
+    text: "🔐 Secure Login"
+
+- assertVisible:
+    text: "Username"
+
+- assertVisible:
+    text: "Password"
+
+# Verify we did NOT reach the dashboard
+- assertNotVisible:
+    text: "✅ Authentication Successful!"
+
+- assertNotVisible:
+    text: "Welcome to the Secure System"
+
+# Test that we can try again with correct credentials
+- tapOn:
+    id: "username"
+- clearText
+- inputText: "admin"
+
+- tapOn:
+    id: "password"
+- clearText
+- inputText: "SecurePass123!"
+
+# Take screenshot before retry
+- takeScreenshot: "04-correct-credentials"
+
+# Attempt login with correct credentials
+- tapOn:
+    text: "Login"
+
+# Should now succeed
+- waitForAnimationToEnd:
+    timeout: 10000
+- assertVisible:
+    text: "✅ Authentication Successful!"
+
+# Take final screenshot showing recovery
+- takeScreenshot: "05-login-recovered"

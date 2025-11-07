@@ -1,0 +1,86 @@
+appId: com.apple.mobilesafari
+---
+# 🔍 Mobile Safari Form Validation Test
+# Tests form validation behavior on mobile Safari
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to the app
+- tapOn: 
+    id: "URL"
+- inputText: "localhost:5173"
+- pressKey: Enter
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# Take initial screenshot
+- takeScreenshot: "01-form-validation-start"
+
+# Verify initial state - login button should be disabled
+- assertVisible:
+    text: "🔐 Secure Login"
+
+# Try to tap login button when form is empty (should be disabled)
+- assertVisible:
+    text: "Login"
+    
+# Check if button is disabled by verifying it doesn't trigger submission
+- tapOn:
+    text: "Login"
+    
+# Should still be on login page (no navigation occurred)
+- assertVisible:
+    text: "🔐 Secure Login"
+
+# Test partial form filling - username only
+- tapOn:
+    id: "username"
+- inputText: "admin"
+
+# Take screenshot with only username filled
+- takeScreenshot: "02-username-only"
+
+# Button should still be disabled
+- tapOn:
+    text: "Login"
+- assertVisible:
+    text: "🔐 Secure Login"
+
+# Clear username and try password only
+- tapOn:
+    id: "username"
+- clearText
+- tapOn:
+    id: "password" 
+- inputText: "password123"
+
+# Take screenshot with only password filled
+- takeScreenshot: "03-password-only"
+
+# Button should still be disabled
+- tapOn:
+    text: "Login"
+- assertVisible:
+    text: "🔐 Secure Login"
+
+# Fill both fields - button should become enabled
+- tapOn:
+    id: "username"
+- inputText: "admin"
+
+# Take screenshot with both fields filled
+- takeScreenshot: "04-both-fields-filled"
+
+# Now login should work
+- tapOn:
+    text: "Login"
+
+# Should navigate to dashboard
+- waitForAnimationToEnd:
+    timeout: 10000
+- assertVisible:
+    text: "✅ Authentication Successful!"
+
+# Take final screenshot showing successful validation flow
+- takeScreenshot: "05-validation-success"

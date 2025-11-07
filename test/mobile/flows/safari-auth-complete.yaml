@@ -1,0 +1,136 @@
+appId: com.apple.mobilesafari
+---
+# 🎭 Comprehensive Safari Authentication Flow Test
+# This test mirrors the Playwright web tests for mobile Safari
+# Tests: Login → Dashboard → Card Validation → Logout
+
+- launchApp
+
+# Wait for Safari to load
+- waitForAnimationToEnd
+
+# Navigate to the authentication app
+- tapOn: 
+    text: "Address"
+- inputText: "localhost:5173"
+- pressKey: Enter
+
+# Wait for page to load
+- waitForAnimationToEnd
+
+# Take initial screenshot
+- takeScreenshot: "01-safari-initial-page"
+
+# Verify we're on the login page by checking for login elements
+- assertVisible:
+    text: "🔐 Secure Login"
+
+- assertVisible:
+    text: "Username"
+
+- assertVisible:
+    text: "Password"
+
+# Fill in the username field
+- tapOn:
+    text: "Enter username"
+- inputText: "admin"
+
+# Take screenshot after username entry
+- takeScreenshot: "02-safari-username-filled"
+
+# Fill in the password field  
+- tapOn:
+    text: "Enter password"
+- inputText: "SecurePass123!"
+
+# Take screenshot with both fields filled
+- takeScreenshot: "03-safari-form-completed"
+
+# Verify login button is enabled and tap it
+- assertVisible:
+    text: "Login"
+- tapOn:
+    text: "Login"
+
+# Wait for dashboard to load
+- waitForAnimationToEnd
+
+# Take screenshot of dashboard
+- takeScreenshot: "04-safari-dashboard-loaded"
+
+# Verify successful authentication
+- assertVisible:
+    text: "✅ Authentication Successful!"
+
+- assertVisible:
+    text: "Welcome to the Secure System"
+
+# Verify the three info cards are present
+- assertVisible:
+    text: "🔒 Secure"
+
+- assertVisible:
+    text: "🔄 Stateless"
+
+- assertVisible:
+    text: "⚡ Fast"
+
+# Verify card descriptions
+- assertVisible:
+    text: "Password encrypted with bcrypt"
+
+- assertVisible:
+    text: "JWT-based authentication"
+
+- assertVisible:
+    text: "React + Vite frontend"
+
+# Verify token section is visible
+- assertVisible:
+    text: "🔑 Your Session Token:"
+
+- assertVisible:
+    text: "JWT token"
+
+# Take screenshot showing all cards validated
+- takeScreenshot: "05-safari-cards-validated"
+
+# Scroll to ensure logout button is visible
+- scroll
+
+# Verify and tap logout button
+- assertVisible:
+    text: "Logout"
+- tapOn:
+    text: "Logout"
+
+# Wait for navigation back to login
+- waitForAnimationToEnd
+
+# Take screenshot after logout
+- takeScreenshot: "06-safari-after-logout"
+
+# Verify we're back on login page
+- assertVisible:
+    text: "🔐 Secure Login"
+
+- assertVisible:
+    text: "Username"
+
+- assertVisible:
+    text: "Password"
+
+# Verify we cannot access dashboard (no dashboard elements visible)
+- assertNotVisible:
+    text: "✅ Authentication Successful!"
+
+- assertNotVisible:
+    text: "Welcome to the Secure System"
+
+# Final verification - form should be empty/reset
+- assertVisible:
+    text: "Enter username"
+
+- assertVisible:
+    text: "Enter password"

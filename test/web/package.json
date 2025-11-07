@@ -1,0 +1,27 @@
+{
+  "name": "auth-test-web-testing",
+  "version": "1.0.0",
+  "description": "Playwright web testing suite for Auth Test Project",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile Chrome' --project='Mobile Safari'",
+    "test:report": "playwright show-report",
+    "test:install": "playwright install",
+    "test:install-deps": "playwright install-deps",
+    "test:codegen": "playwright codegen http://localhost:5173",
+    "test:auth-flow": "playwright test tests/auth.spec.js --headed --project=chromium",
+    "test:full-report": "npm run test && npm run test:report"
+  },
+  "keywords": ["playwright", "testing", "e2e", "automation", "web"],
+  "author": "Auth Test Project",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
