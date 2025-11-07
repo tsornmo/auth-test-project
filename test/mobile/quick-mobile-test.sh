@@ -33,13 +33,13 @@ if command -v xcrun &> /dev/null; then
     fi
     
     echo "✅ Found booted simulator: $DEVICE_ID"
-    DEVICE_ARG="--device-id $DEVICE_ID"
+    DEVICE_NAME="$DEVICE_ID"
 else
     # No Xcode command line tools - try without device specification
     echo "⚠️  Xcode command line tools not found"
     echo "💡 Install with: xcode-select --install"
     echo "📱 Attempting to run test without device specification..."
-    DEVICE_ARG=""
+    DEVICE_NAME="Auto-detect"
 fi
 
 # Check if servers are running
@@ -64,11 +64,7 @@ fi
 # Run the main authentication test
 echo ""
 echo "🚀 Running complete authentication flow test..."
-if [ -n "$DEVICE_ARG" ]; then
-    echo "📱 Device: $DEVICE_ID"
-else
-    echo "📱 Device: Auto-detect"
-fi
+echo "📱 Device: $DEVICE_NAME"
 
 echo ""
 echo "🎬 Test will perform the following steps:"
@@ -84,7 +80,8 @@ echo "   9. 👋 Click Logout"
 echo "  10. 🔄 Verify return to login"
 echo ""
 
-if maestro test flows/safari-auth-complete.yaml $DEVICE_ARG; then
+# Maestro automatically detects the booted simulator, no device-id flag needed
+if maestro test flows/safari-auth-complete.yaml; then
     echo ""
     echo "🎉 Mobile Safari authentication test completed successfully!"
     echo ""
