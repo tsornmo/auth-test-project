@@ -1,0 +1,33 @@
+appId: com.apple.mobilesafari
+---
+- launchApp: com.apple.mobilesafari
+
+- tapOn: Address
+- inputText: "localhost:5173"
+- pressKey: Enter
+- assertVisible: 🔐 Secure Login
+- assertVisible:
+    text: Username
+    index: -1
+- assertVisible:
+    text: Password
+    index: -1
+- assertVisible: Login
+- tapOn:
+    text: Username
+    index: 1
+- inputText: "admin"
+- tapOn: Next
+- tapOn:
+    text: Password
+    index: 1
+- inputText: "SecurePass123!"
+- tapOn: selected
+- tapOn: "Login"
+- assertVisible: "✅ Authentication Successful!"
+- assertVisible: "Logout"
+- assertVisible: "🎉"
+- assertVisible: "Welcome to the Secure System"
+- assertVisible: "You have successfully authenticated using the predefined password."
+- assertVisible: "🔑 Your Session Token:"
+- tapOn: "Logout"

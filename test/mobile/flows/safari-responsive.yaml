@@ -7,12 +7,13 @@ appId: com.apple.mobilesafari
 - waitForAnimationToEnd
 
 # Navigate to the app
-- tapOn: 
-    id: "URL"
+- tapOn: Address
+
 - inputText: "localhost:5173"
 - pressKey: Enter
 - waitForAnimationToEnd:
     timeout: 10000
+
 
 # Take screenshot of mobile login layout
 - takeScreenshot: "01-mobile-login-layout"
@@ -22,28 +23,25 @@ appId: com.apple.mobilesafari
     text: "🔐 Secure Login"
 
 # Check that form elements are properly sized for mobile
-- assertVisible:
-    id: "username"
+- assertVisible: "Username"
 
-- assertVisible:
-    id: "password"
+- assertVisible: "password"
 
 # Test form interaction on mobile
-- tapOn:
-    id: "username"
+- tapOn: Enter username
 - inputText: "admin"
 
+- tapOn: Next
 # Verify mobile keyboard doesn't break layout
 - takeScreenshot: "02-mobile-with-keyboard"
 
 # Continue with password
-- tapOn:
-    id: "password"
+- tapOn: "Enter password"
 - inputText: "SecurePass123!"
 
+- tapOn: selected
 # Hide keyboard by tapping login
-- tapOn:
-    text: "Login"
+- tapOn: "Login"
 
 # Wait for dashboard mobile layout
 - waitForAnimationToEnd:
@@ -65,8 +63,7 @@ appId: com.apple.mobilesafari
 
 - scroll
 
-- assertVisible:
-    text: "Stateless"
+- assertVisible: "Stateless"
 
 - scroll
 

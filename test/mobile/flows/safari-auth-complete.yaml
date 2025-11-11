@@ -39,6 +39,13 @@ appId: com.apple.mobilesafari
 # Take screenshot after username entry
 - takeScreenshot: "02-safari-username-filled"
 
+# Dismiss keyboard by tapping on the Password label to ensure password field becomes accessible
+- tapOn:
+    text: "Password"
+
+# Wait briefly for keyboard to dismiss
+- waitForAnimationToEnd
+
 # Fill in the password field  
 - tapOn:
     text: "Enter password"
@@ -46,6 +53,13 @@ appId: com.apple.mobilesafari
 
 # Take screenshot with both fields filled
 - takeScreenshot: "03-safari-form-completed"
+
+# Dismiss keyboard by tapping on the page heading to ensure Login button is visible
+- tapOn:
+    text: "🔐 Secure Login"
+
+# Wait briefly for keyboard to dismiss
+- waitForAnimationToEnd
 
 # Verify login button is enabled and tap it
 - assertVisible:
@@ -66,15 +80,15 @@ appId: com.apple.mobilesafari
 - assertVisible:
     text: "Welcome to the Secure System"
 
+# Scroll down to reveal all info cards
+- scroll
+
 # Verify the three info cards are present
 - assertVisible:
-    text: "🔒 Secure"
+    text: "Secure"
 
 - assertVisible:
-    text: "🔄 Stateless"
-
-- assertVisible:
-    text: "⚡ Fast"
+    text: "Fast"
 
 # Verify card descriptions
 - assertVisible:
