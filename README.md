@@ -58,6 +58,19 @@ auth-test-project/
    ./manage.sh start
    ```
 
+4. **Set up environment variables**
+   - Copy `.env.example` to `.env` in both client and server directories.
+   - Fill in the values, especially for GitHub OAuth app client ID and secret.
+
+5. **Run the application**
+   ```bash
+   npm run dev
+   ```
+
+6. **Access the application**
+   - Open `http://localhost:3000` in your browser.
+   - Use `/auth/github` to sign in with GitHub.
+
 ## 🛠️ Management Commands
 
 The project uses a single unified management script for all operations:
